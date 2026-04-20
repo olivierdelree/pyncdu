@@ -13,3 +13,132 @@ dependencies = []
 
 [tool.hatch.version]
 path = "src/pyncdu/__about__.py"
+
+[dependency-groups]
+dev = [{ include-group = "linting" }]
+linting = [
+  # Don't use >=0.15.7 as its LSP reports violations as errors instead of warnings in preview.
+  # See https://github.com/astral-sh/ruff/issues/24069 and https://github.com/astral-sh/ruff/pull/23846.
+  "ruff<0.15.7",
+]
+
+[tool.ruff]
+fix = true     # Apply safe fixes automatically
+preview = true # Use unstable rules, fixes, and formatting
+
+[tool.ruff.format]
+docstring-code-format = true # Format code snippets inside docstrings
+
+[tool.ruff.lint]
+future-annotations = true       # Allow rules to add 'from __future__ import annotations'
+logger-objects = ["log.logger"]
+
+select = [
+  "ERA",    # Disallow commented out code
+  "FAST",   # FastAPI-specific checks
+  "YTT",    # Prevent misuse of `sys.version`
+  "S",      # Security testing (flake8-bandit)
+  "BLE",    # Disallow blind except
+  "FBT",    # Diallow boolean traps
+  "B",      # Catch common sources of bugs
+  "A",      # Disallow shadowing builtins
+  "COM818", # Disallow trailing comma on bare tuple
+  "C4",     # Ensure correct comprehensions
+  "CPY",    # Force a copyright notice at the top of files
+  "DTZ",    # Disallow naive datetime
+  "T10",    # Disallow debugger traces
+  "EXE",    # Validate shebangs
+  "FA",     # Ensure proper usage of `from __future__ import annotations`
+  "ISC",    # Ensure good practice for implicit string concatenation
+  "ICN",    # Force using conventional aliases for popular packages
+  "LOG",    # Ensure good practice for logging
+  "G",      # Ensure good practice for log formatting
+  "INP",    # Disallow namespace packages
+  "PIE",    # Miscellaenous linting (flake8-pie)
+  "T20",    # Disallow print statements
+  "PT",     # Ensure good practice for pytest-based tests
+  "Q",      # Enforce double quotes style
+  "RSE",    # Disallow empty parentheses after exceptions
+  "RET",    # Ensure proper return values
+  "SLF",    # Disallow use of private members
+  "SIM",    # Ensure code is simplified
+  "SLOT",   # Ensure usbtypes of immutable types implement `__slots__`
+  "TID",    # Ensure tidier imports
+  "TC",     # Ensure proper typing imports and forward references
+  "ARG",    # Disallow unused arguments
+  "PTH",    # Ensure `pathlib` functions are used where possible
+  "FLY",    # Favour f-strings to `str.join`
+  "I",      # Ensure properly sorted imports
+  "N",      # Ensure PEP 8 naming conventions
+  "PERF",   # Disallow performance anti-patterns
+  "E",      # Ensure proper adherence to PEP 8
+  "W",      # Ensure proper adherence to PEP 8
+  "DOC",    # Ensure proper docstrings information
+  "D",      # Ensure proper docstrings style
+  "F",      # Miscellaenous linting (Pyflakes)
+  "PGH",    # Disallow blanket `noqa` and `type: ignore`, and invalid mock access
+  "PL",     # Pylint checks
+  "UP",     # Ensure use of up-to-date syntax
+  "FURB",   # Ensure use of up-to-date syntax
+  "RUF",    # Miscellaneous linting (Ruff)
+  "TRY",    # Ensure good practice for exception handling
+]
+
+ignore = [
+  "RET505",  # Allow `if-elif` when `if` returns (better readability)
+  "RET506",  # Allow `if-elif` when `if` raises (better readability)
+  "TD002",   # Don't enforce including an author with TODOs
+  "TD003",   # Don't enforce including an issue link with TODOs
+  "D107",    # Don't force a documented `__init__` since we document it at the class level
+  "D203",    # Don't allow a blank line before class docstring (conflicts with D211)
+  "PLR0911", # Allow too many return statements
+  "PLR0912", # Allow too many branches
+  "PLR0913", # Allow too many arguments
+  "PLR0915", # Allow too many statements
+  "TRY003",  # Allow verbose messages in built-in exception constructors
+
+  # Covered by 'basedpyright'
+  "ANN",     # flake8-annotations
+  "RET503",  # implicit-return
+  "D418",    # overload-with-docstring
+  "PLE0605", # invalid-all-format
+  "UP006",   # non-pep585-annotation
+  "UP007",   # non-pep604-annotation
+  "UP035",   # deprecated-import
+  "RUF013",  # implicit-optional
+  "RUF016",  # invalid-index-type
+
+  # Explicit mention of non-selected groups
+  "AIR",   # Airflow
+  "ASYNC", # flake8-async
+  "DJ",    # flake8-django
+  "EM",    # flake8-errmsg
+  "FIX",   # flake8-fixme
+  "INT",   # flake8-gettext
+  "PYI",   # flake8-pyi
+  "TD",    # flake8-todos
+  "C90",   # mccabe
+  "NPY",   # NymPy-specific rules
+  "PD",    # pandas-vet
+]
+
+unfixable = [
+  "B905", # Force programmer to decide which strictness to use with `builtins.zip`
+]
+
+extend-safe-fixes = [
+  "TC001", # Automatically put first-party imports into type-checking block
+  "TC002", # Automatically put third-party imports into type-checking block
+  "TC003", # Automatically put standard library imports into type-checking block
+  "TC004", # Automatically move non-typing-exclusive imports out of type-checking block
+]
+
+[tool.ruff.lint.flake8-copyright]
+min-file-size = 1
+notice-rgx = "(?i)SPDX-FileCopyrightText: © ?\\d{4}"
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
