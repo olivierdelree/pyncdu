@@ -1,1 +1,8 @@
-words = ["pyncdu"]
+words = [
+    "bstr",
+    "cbor",
+    "ncdu",
+    "nint",
+    "pyncdu",
+    "ustr",
+]
