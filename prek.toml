@@ -1,0 +1,22 @@
+[[repos]]
+repo = "https://github.com/pre-commit/pre-commit-hooks"
+rev = "v6.0.0"
+hooks = [
+  { id = "check-added-large-files" },
+  { id = "check-case-conflict" },
+  { id = "check-executables-have-shebangs" },
+  { id = "check-toml" },
+  { id = "check-yaml" },
+  { id = "end-of-file-fixer" },
+  { id = "trailing-whitespace" },
+]
+
+[[repos]]
+repo = "https://github.com/charliermarsh/ruff-pre-commit"
+rev = "v0.15.11"
+hooks = [{ id = "ruff-check" }, { id = "ruff-format" }]
+
+[[repos]]
+repo = "https://github.com/DetachHead/basedpyright-prek-mirror"
+rev = "1.39.2"
+hooks = [{ id = "basedpyright" }]
