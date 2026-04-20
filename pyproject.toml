@@ -15,12 +15,13 @@ dependencies = []
 path = "src/pyncdu/__about__.py"
 
 [dependency-groups]
-dev = [{ include-group = "linting" }]
+dev = [{ include-group = "linting" }, { include-group = "typing" }]
 linting = [
   # Don't use >=0.15.7 as its LSP reports violations as errors instead of warnings in preview.
   # See https://github.com/astral-sh/ruff/issues/24069 and https://github.com/astral-sh/ruff/pull/23846.
   "ruff<0.15.7",
 ]
+typing = ["basedpyright>=1.39.0"]
 
 [tool.ruff]
 fix = true     # Apply safe fixes automatically
@@ -142,3 +143,6 @@ force-single-line = true
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.basedpyright]
+reportImplicitStringConcatenation = false # Avoid having to nest implicit concatenation of string in function calls (e.g., multiline logging calls)
