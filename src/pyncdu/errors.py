@@ -39,3 +39,7 @@ class ParsingError(Exception, abc.ABC):
 
 class CBORError(ParsingError):
     """CBOR failed to parse data."""
+
+
+class NCDUError(ParsingError):
+    """NCDU failed to parse data."""
