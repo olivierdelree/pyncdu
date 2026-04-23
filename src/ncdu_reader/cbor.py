@@ -10,7 +10,7 @@ import enum
 import itertools
 from typing import TYPE_CHECKING
 
-from pyncdu.errors import CBORError
+from ncdu_reader.errors import CBORError
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
